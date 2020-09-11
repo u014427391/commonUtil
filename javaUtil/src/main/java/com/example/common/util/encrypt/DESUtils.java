@@ -8,7 +8,7 @@ import java.security.spec.InvalidKeySpecException;
 
 /**
  * <pre>
- *
+ *      DES加密工具类
  * </pre>
  *
  * <pre>
