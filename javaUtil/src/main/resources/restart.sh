@@ -1,0 +1,1 @@
+sh sys.sh restart
