@@ -2,13 +2,17 @@ package com.example.common.util.validator.sample.model;
 
 import com.example.common.util.validator.EnumValueValidator;
 import com.example.common.util.validator.sample.enums.PayTypeEnum;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import javax.validation.constraints.NotNull;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @SuperBuilder(toBuilder = true)
 @ToString
 public class ShopOrder {

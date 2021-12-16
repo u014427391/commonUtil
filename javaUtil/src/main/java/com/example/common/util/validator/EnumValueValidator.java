@@ -50,8 +50,7 @@ public @interface EnumValueValidator {
             if (enumClass == null || StringUtils.isEmpty(enumMethod)) return Boolean.TRUE;
             Class<?> vclass = o.getClass();
             try {
-                Object obj = vclass.newInstance();
-                Method method = vclass.getMethod(enumMethod);
+                Method method = enumClass.getMethod(enumMethod,vclass);
                 if (!Boolean.TYPE.equals(method.getReturnType()) &&
                         !Boolean.class.equals(method.getReturnType())) {
                     throw new RuntimeException("校验方法不是布尔类型!");
@@ -60,7 +59,7 @@ public @interface EnumValueValidator {
                     throw new RuntimeException("校验方法不是静态方法!");
                 }
                 method.setAccessible(true);
-                Boolean res = (Boolean) method.invoke(obj);
+                Boolean res = (Boolean) method.invoke(null,o);
                 return res != null ? res : false;
             } catch (NoSuchMethodException e) {
                 log.error("NoSuchMethodException:{}" ,e);
@@ -70,9 +69,6 @@ public @interface EnumValueValidator {
                 throw new RuntimeException(e);
             } catch (InvocationTargetException e) {
                 log.error("InvocationTargetException:{}" ,e);
-                throw new RuntimeException(e);
-            } catch (InstantiationException e) {
-                log.error("InstantiationException:{}" ,e);
                 throw new RuntimeException(e);
             }
         }
