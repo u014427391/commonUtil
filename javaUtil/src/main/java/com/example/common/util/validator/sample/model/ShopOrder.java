@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 @ToString
 public class ShopOrder {
 
-    @EnumValueValidator(enumClass = PayTypeEnum.class , enumMethod = "isValueValid" , message = "支付类型校验有误")
+    @EnumValueValidator(enumClass = PayTypeEnum.class , enumMethod = "isStrsValid" , message = "支付类型校验有误")
     @NotNull(message = "支付类型必须传")
     private String payType;
 

@@ -1,6 +1,7 @@
 package com.example.common.util.validator.sample.enums;
 
 
+import org.springframework.util.StringUtils;
 
 public enum PayTypeEnum {
 
@@ -32,11 +33,27 @@ public enum PayTypeEnum {
     }
 
     public static boolean isValueValid(String value) {
-        for (PayTypeEnum typeEnum : values()) {
-            if (!typeEnum.getCode().equals(value))
-                return false;
+        if(!StringUtils.isEmpty(value)){
+            for (PayTypeEnum enumObj : PayTypeEnum.values()) {
+                if (enumObj.getCode().equals(value)) {
+                    return true;
+                }
+            }
+            return false;
         }
         return true;
+    }
+
+    public static boolean isStrsValid(String value) {
+        if (!value.contains(","))
+            return isValueValid(value);
+        String[] arr = StringUtils.split(value , ",");
+        for (String s : arr) {
+            if (!isValueValid(s)) {
+                return false;
+            }
+        }
+       return true;
     }
 
 }
