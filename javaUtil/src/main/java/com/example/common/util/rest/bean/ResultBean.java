@@ -15,7 +15,7 @@ import org.springframework.http.HttpStatus;
  * </pre>
  */
 @Data
-public class ResultBean {
+public class ResultBean<T> {
 
 	/**
 	 * 状态
@@ -28,41 +28,41 @@ public class ResultBean {
 	/**
 	 * 数据返回
 	 * */
-	private Object data;
+	private T data;
 
-	public ResultBean(int status, String desc, Object data) {
+	public ResultBean(int status, String desc, T data) {
 		this.status = status;
 		this.desc = desc;
 		this.data = data;
 	}
 
-	public ResultBean(Object data) {
+	public ResultBean(T data) {
 		this.status = HttpStatus.OK.value();
 		this.desc = "处理成功";
 		this.data = data;
 	}
 
-	public static ResultBean ok(Object data) {
+	public static <T> ResultBean<T> ok(T data) {
 		return new ResultBean(data);
 	}
 
-	public static ResultBean ok() {
+	public static <T> ResultBean<T> ok() {
 		return new ResultBean(null);
 	}
 
-	public static ResultBean badRequest(String desc,Object data) {
+	public static <T> ResultBean<T> badRequest(String desc,T data) {
 		return new ResultBean(HttpStatus.BAD_REQUEST.value(), desc, data);
 	}
 
-	public static ResultBean badRequest(String desc) {
+	public static <T> ResultBean<T> badRequest(String desc) {
 		return new ResultBean(HttpStatus.BAD_REQUEST.value(), desc, null);
 	}
 
-	public static ResultBean serverError(String desc, Object data){
+	public static <T> ResultBean serverError(String desc, T data){
 		return new ResultBean(HttpStatus.INTERNAL_SERVER_ERROR.value(),"服务器内部异常:"+desc,data);
 	}
 
-	public static ResultBean serverError(String desc){
+	public static <T> ResultBean serverError(String desc){
 		return new ResultBean(HttpStatus.INTERNAL_SERVER_ERROR.value(),"服务器内部异常:"+desc,null);
 	}
 
