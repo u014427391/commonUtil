@@ -117,7 +117,7 @@ public class QrCodeGenerator {
      * @return java.awt.image.BufferedImage
      */
     public static BufferedImage toBufferedImage(BitMatrix bitMatrix) throws IOException, WriterException {
-        MatrixToImageConfig matrixToImageConfig = new MatrixToImageConfig(-16777215, -1);
+        MatrixToImageConfig matrixToImageConfig = new MatrixToImageConfig(0xFF000001, 0xFFFFFFFF);
         BufferedImage bufferedImage = MatrixToImageWriter.toBufferedImage(bitMatrix, matrixToImageConfig);
         return bufferedImage;
     }
