@@ -14,7 +14,6 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -131,20 +130,27 @@ public class QrCodeGenerator {
      */
     public static BufferedImage addQrCodeLogo(BufferedImage bufferedImage, File logoFile) throws IOException {
         Graphics2D graphics = bufferedImage.createGraphics();
-        int width = bufferedImage.getWidth();
-        int height = bufferedImage.getHeight();
+        int matrixWidth = bufferedImage.getWidth();
+        int matrixHeigh = bufferedImage.getHeight();
+
+        // 读取logo图片文件
         BufferedImage logo = ImageIO.read(logoFile);
-        graphics.drawImage(logo, width / 5 * 2, height / 5 * 2, width / 5, height / 5, null);
-        BasicStroke stroke = new BasicStroke(5.0F, 1, 1);
-        graphics.setStroke(stroke);
-        RoundRectangle2D.Float round = new RoundRectangle2D.Float((width / 5 * 2), (height / 5 * 2), (width / 5), (height / 5), 20.0F, 20.0F);
+        int logoWidth = logo.getWidth();
+        int logoHeight = logo.getHeight();
+
+        //  计算logo放置位置
+        int x = bufferedImage.getWidth()  / 5*2;
+        int y = bufferedImage.getHeight() / 5*2;
+        int width = matrixWidth / 5;
+        int height = matrixHeigh / 5;
+
+        // 开始绘制图片
+        graphics.drawImage(logo, x, y, width, height, null);
+        graphics.drawRoundRect(x, y, logoWidth, logoHeight, 15, 15);
+        graphics.setStroke(new BasicStroke(5.0F, 1, 1));
         graphics.setColor(Color.white);
-        graphics.draw(round);
-        BasicStroke stroke2 = new BasicStroke(1.0F, 1, 1);
-        graphics.setStroke(stroke2);
-        RoundRectangle2D.Float round2 = new RoundRectangle2D.Float((width / 5 * 2 + 2), (height / 5 * 2 + 2), (width / 5 - 4), (height / 5 - 4), 20.0F, 20.0F);
-        graphics.setColor(new Color(128, 128, 128));
-        graphics.draw(round2);
+        graphics.drawRect(x, y, logoWidth, logoHeight);
+
         graphics.dispose();
         bufferedImage.flush();
         return bufferedImage;
