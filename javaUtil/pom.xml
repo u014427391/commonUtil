@@ -21,7 +21,9 @@
         <slf4j.version>1.7.29</slf4j.version>
         <!-- fastjson -->
         <fastjson.version>1.1.40</fastjson.version>
-        
+        <!-- google zxing-->
+        <google.zxing.version>3.4.0</google.zxing.version>
+
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -102,6 +104,17 @@
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
             <version>5.7.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>${google.zxing.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>javase</artifactId>
+            <version>${google.zxing.version}</version>
         </dependency>
 
         <dependency>
