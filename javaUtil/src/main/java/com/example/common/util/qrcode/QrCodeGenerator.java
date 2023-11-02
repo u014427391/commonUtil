@@ -111,6 +111,18 @@ public class QrCodeGenerator {
     }
 
     /**
+     * 解析二维码
+     * @Date 2023/11/02 11:20
+     * @Param [file]
+     * @return java.lang.String
+     */
+    public static String decodeQrCode(File file) throws Exception {
+        if (file == null) return StrUtil.EMPTY;
+        BufferedImage bufferedImage = ImageIO.read(file);
+        return decodeQrCode(bufferedImage);
+    }
+
+    /**
      * 转换为BufferedImage
      * @Date 2023/09/24 22:32
      * @Param [bitMatrix]
